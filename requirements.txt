@@ -1,6 +1,7 @@
-torch==2.8.0
 fastapi
 uvicorn
+torch
 transformers
-requests
-python-multipart
+nvidia-cuda-runtime-cu12
+nvidia-cudnn-cu12
+nvidia-cublas-cu12
