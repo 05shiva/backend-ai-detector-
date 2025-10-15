@@ -5,7 +5,6 @@ import torch
 
 app = FastAPI(title="AI Text Detector")
 
-# Allow requests from any frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -13,14 +12,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load open-source Roberta model (lightweight)
 MODEL_NAME = "roberta-base-openai-detector"
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME)
+tokenizer = None
+model = None
 
 @app.post("/detect/text")
 async def detect_text(text: str = Form(...)):
+    global tokenizer, model
     try:
+        if tokenizer is None or model is None:
+            print("Loading model...")
+            tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+            model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME)
+
         inputs = tokenizer(text, return_tensors="pt")
         with torch.no_grad():
             outputs = model(**inputs)
