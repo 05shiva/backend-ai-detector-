@@ -1,4 +1,4 @@
-fastapi
-uvicorn
-torch==2.2.0+cpu --index-url https://download.pytorch.org/whl/cpu
+fastapi==0.119.0
+uvicorn==0.37.0
+torch==2.5.1
 transformers==4.45.0
