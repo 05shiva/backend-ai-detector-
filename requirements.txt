@@ -2,3 +2,4 @@ fastapi==0.119.0
 uvicorn==0.37.0
 torch==2.5.1
 transformers==4.45.0
+python-multipart==0.0.9
